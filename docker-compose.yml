@@ -1,0 +1,22 @@
+version: '3.0'
+services:
+  bjj-bd-postgres:
+    image: postgres:16-alpine
+    container_name: bjj-bd-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${BD_USERNAME}
+      POSTGRES_PASSWORD: ${BD_PASSWORD}
+      POSTGRES_DB: ${BD_NAME}
+      POSTGRES_HOST: ${BD_HOST}
+
+    ports:
+      - "${BD_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+
+volumes:
+  postgres_data:
