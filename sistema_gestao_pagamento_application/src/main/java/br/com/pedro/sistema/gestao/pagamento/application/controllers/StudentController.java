@@ -14,6 +14,12 @@ import br.com.pedro.sistema.gestao.pagamento.application.persistence.mappers.Stu
 import br.com.pedro.sistema.gestao.pagamento.core.models.Person;
 import br.com.pedro.sistema.gestao.pagamento.core.models.Responsible;
 import br.com.pedro.sistema.gestao.pagamento.core.models.Student;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.ActiveStudentUseCase;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.FindAllActiveStudentsUseCase;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.FindAllStudentsUseCase;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.FindStudentByIdUseCase;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.InactiveStudentUseCase;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.SaveStudentUseCase;
 import br.com.pedro.sistema.gestao.pagamento.usecases.student.UpdateStudentUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
