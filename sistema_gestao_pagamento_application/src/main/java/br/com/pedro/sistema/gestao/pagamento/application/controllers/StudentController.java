@@ -1,5 +1,11 @@
 package br.com.pedro.sistema.gestao.pagamento.application.controllers;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import br.com.pedro.sistema.gestao.pagamento.application.controllers.dtos.CreateStudentRequest;
 import br.com.pedro.sistema.gestao.pagamento.application.controllers.dtos.StudentResponse;
 import br.com.pedro.sistema.gestao.pagamento.application.controllers.dtos.UpdateStudentRequest;
@@ -8,7 +14,7 @@ import br.com.pedro.sistema.gestao.pagamento.application.persistence.mappers.Stu
 import br.com.pedro.sistema.gestao.pagamento.core.models.Person;
 import br.com.pedro.sistema.gestao.pagamento.core.models.Responsible;
 import br.com.pedro.sistema.gestao.pagamento.core.models.Student;
-import br.com.pedro.sistema.gestao.pagamento.usecases.student.*;
+import br.com.pedro.sistema.gestao.pagamento.usecases.student.UpdateStudentUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,11 +22,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "Alunos", description = "Endpoints para cadastro e gestão de alunos")
 @RestController
@@ -114,6 +115,20 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<StudentResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateStudentRequest request) {
         Student studentData = new Student();
+        Person person = new Person();
+        if (request.name() != null && !request.name().trim().isEmpty()) {
+            person.setName(request.name().trim());
+        }
+        if (request.email() != null && !request.email().trim().isEmpty()) {
+            person.setEmail(request.email().trim());
+        }
+        if (request.phoneNumber() != null && !request.phoneNumber().trim().isEmpty()) {
+            person.setPhoneNumber(request.phoneNumber().trim());
+        }
+        if (request.birthday() != null) {
+            person.setBirthday(request.birthday());
+        }
+        studentData.setPerson(person);
         studentData.setWeight(request.weight());
         studentData.setHeight(request.height());
         studentData.setIsHealthProblem(request.isHealthProblem());

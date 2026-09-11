@@ -49,17 +49,8 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Origens permitidas para Expo (localhost, IP local e emuladores)
-        configuration.setAllowedOriginPatterns(List.of(
-                "http://localhost:8081",
-                "http://127.0.0.1:8081",
-                "http://localhost:19006",
-                "http://localhost:[*]",
-                "http://127.0.0.1:[*]",
-                "http://192.168.*:[*]",
-                "http://10.*:[*]",
-                "exp://*"
-        ));
+        // Origens permitidas para Expo Web, mobile e produção
+        configuration.setAllowedOriginPatterns(List.of("*"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));

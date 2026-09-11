@@ -1,9 +1,15 @@
 package br.com.pedro.sistema.gestao.pagamento.application.controllers.dtos;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record UpdateStudentRequest(
+        String name,
+        String email,
+        String phoneNumber,
+        LocalDate birthday,
         @NotNull(message = "Weight is mandatory")
         @Positive(message = "Weight must be positive")
         int weight,
@@ -15,4 +21,3 @@ public record UpdateStudentRequest(
         String healthProblemDescription
 ) {
 }
-

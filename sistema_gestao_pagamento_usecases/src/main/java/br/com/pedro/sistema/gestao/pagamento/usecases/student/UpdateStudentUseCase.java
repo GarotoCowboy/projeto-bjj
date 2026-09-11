@@ -26,6 +26,21 @@ public class UpdateStudentUseCase {
        Student existingStudent = studentRepository.findById(id)
        .orElseThrow(() -> new StudentException(ErrorCode.ST_0006));
 
+        if (student.getPerson() != null && existingStudent.getPerson() != null) {
+            if (student.getPerson().getName() != null && !student.getPerson().getName().trim().isEmpty()) {
+                existingStudent.getPerson().setName(student.getPerson().getName());
+            }
+            if (student.getPerson().getEmail() != null && !student.getPerson().getEmail().trim().isEmpty()) {
+                existingStudent.getPerson().setEmail(student.getPerson().getEmail());
+            }
+            if (student.getPerson().getPhoneNumber() != null && !student.getPerson().getPhoneNumber().trim().isEmpty()) {
+                existingStudent.getPerson().setPhoneNumber(student.getPerson().getPhoneNumber());
+            }
+            if (student.getPerson().getBirthday() != null) {
+                existingStudent.getPerson().setBirthday(student.getPerson().getBirthday());
+            }
+        }
+
         existingStudent.setHeight(student.getHeight());
         existingStudent.setWeight(student.getWeight());
         existingStudent.setIsHealthProblem(student.getIsHealthProblem());

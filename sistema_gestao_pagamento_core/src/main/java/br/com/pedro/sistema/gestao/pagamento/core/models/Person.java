@@ -28,7 +28,7 @@ public class Person {
         this.updatedAt = updatedAt;
     }
 
-    protected Person() {
+    public Person() {
     }
 
     public Person(String name, String email,String phoneNumber, LocalDate birthday) {
@@ -44,32 +44,6 @@ public class Person {
         this.birthday = birthday;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-    }
-
-    private void validateName(String name) {
-        if(name == null || name.trim().isEmpty()){
-            throw new PersonException(ErrorCode.PE_0001);
-        }
-
-    }
-
-    private void validateAge(LocalDate birthday) {
-        if(birthday == null){
-            throw new PersonException(ErrorCode.PE_0004);
-        }
-    }
-
-    private void validatePhoneNumber(String phoneNumber) {
-        if(phoneNumber == null || phoneNumber.trim().isEmpty()){
-             throw new PersonException(ErrorCode.PE_0003);
-        }
-        
-    }
-
-    private void validateEmail(String email) {
-        if(email == null || email.trim().isEmpty() || !email.contains("@")){
-            throw new PersonException(ErrorCode.PE_0002);
-        }
     }
 
     public int getAge() {
@@ -126,7 +100,6 @@ public class Person {
         return updatedAt;
     }
 
-    
     public LocalDate getBirthday() {
         return birthday;
     }
@@ -138,14 +111,12 @@ public class Person {
 
     }
 
-   
     @Override
     public String toString() {
         return "Person [id=" + id + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber
                 + ", birthday=" + birthday + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
 
-    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -155,6 +126,7 @@ public class Person {
         return result;
     }
 
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -175,6 +147,34 @@ public class Person {
         } else if (!email.equals(other.email))
             return false;
         return true;
+    }
+
+    private void validateName(String name) {
+        if(name == null || name.trim().isEmpty()){
+            throw new PersonException(ErrorCode.PE_0001);
+        }
+
+    }
+
+   
+    private void validateAge(LocalDate birthday) {
+        if(birthday == null){
+            throw new PersonException(ErrorCode.PE_0004);
+        }
+    }
+
+    
+    private void validatePhoneNumber(String phoneNumber) {
+        if(phoneNumber == null || phoneNumber.trim().isEmpty()){
+             throw new PersonException(ErrorCode.PE_0003);
+        }
+        
+    }
+
+    private void validateEmail(String email) {
+        if(email == null || email.trim().isEmpty() || !email.contains("@")){
+            throw new PersonException(ErrorCode.PE_0002);
+        }
     }
 
 
